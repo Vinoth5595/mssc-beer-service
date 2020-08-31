@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -13,10 +14,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javageek.web.controller.BeerController;
 import com.javageek.web.model.BeerDto;
+import com.javageek.web.model.BeerStyleEnum;
 
 @WebMvcTest(BeerController.class)
 class MsscBeerServiceApplicationTests {
@@ -37,7 +38,7 @@ class MsscBeerServiceApplicationTests {
 	
 	@Test
 	public void saveNewBeer() throws Exception {
-		BeerDto beerDto = BeerDto.builder().build();
+		BeerDto beerDto = getValidBeerDto();
 		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 		
 		mockMvc.perform(
@@ -49,7 +50,7 @@ class MsscBeerServiceApplicationTests {
 	
 	@Test
 	public void updateBeer() throws Exception {
-		BeerDto beerDto = BeerDto.builder().build();
+		BeerDto beerDto = getValidBeerDto();
 		String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 		
 		mockMvc.perform(
@@ -57,6 +58,15 @@ class MsscBeerServiceApplicationTests {
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(beerDtoJson)
 					).andExpect(status().isNoContent());
+	}
+	
+	BeerDto getValidBeerDto() {
+		return BeerDto.builder()
+				.beerName("Beer 1")
+				.beerStyle(BeerStyleEnum.GOSE)
+				.price(new BigDecimal(100))
+				.upc(123457L)
+				.build();
 	}
 
 }
