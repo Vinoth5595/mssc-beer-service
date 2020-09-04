@@ -1,9 +1,11 @@
 com\javageek\web\model\BeerDto$BeerDtoBuilder.class
 com\javageek\bootstrap\BeerLoader.class
 com\javageek\MsscBeerServiceApplication.class
+com\javageek\services\BeerService.class
 com\javageek\web\controller\MvcExceptionHandler.class
 com\javageek\repository\BeerRepository.class
 com\javageek\mapper\DateMapper.class
+com\javageek\web\controller\NotFoundException.class
 com\javageek\web\model\BeerPagedList.class
 com\javageek\web\model\BeerDto.class
 com\javageek\domain\Beer.class
