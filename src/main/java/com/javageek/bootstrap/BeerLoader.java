@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import com.javageek.domain.Beer;
 import com.javageek.repository.BeerRepository;
 
-@Component
+//@Component
 public class BeerLoader implements CommandLineRunner {
 	
 	public static final String BEER_1_UPC = "0631234200036";
