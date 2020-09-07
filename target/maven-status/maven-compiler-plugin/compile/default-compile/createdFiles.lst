@@ -2,6 +2,7 @@ com\javageek\services\BeerInventoryService.class
 com\javageek\mapper\BeerMapperDecorator.class
 com\javageek\bootstrap\BeerLoader.class
 com\javageek\services\inventory\model\BeerInventoryDto$BeerInventoryDtoBuilder.class
+com\javageek\mapper\BeerMapperImpl_.class
 com\javageek\web\controller\MvcExceptionHandler.class
 com\javageek\web\controller\NotFoundException.class
 com\javageek\web\model\BeerPagedList.class
