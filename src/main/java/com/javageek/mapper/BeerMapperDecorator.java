@@ -3,7 +3,7 @@ package com.javageek.mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.javageek.domain.Beer;
-import com.javageek.services.BeerInventoryService;
+import com.javageek.services.inventory.BeerInventoryService;
 import com.javageek.web.model.BeerDto;
 
 public abstract class BeerMapperDecorator implements BeerMapper {

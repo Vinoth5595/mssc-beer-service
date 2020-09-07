@@ -1,4 +1,4 @@
-package com.javageek.services;
+package com.javageek.services.inventory;
 
 import java.util.UUID;
 

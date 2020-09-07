@@ -18,8 +18,9 @@ import com.javageek.web.model.BeerPagedList;
 import com.javageek.web.model.BeerStyleEnum;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class BeerServiceImpl implements BeerService {
@@ -33,6 +34,9 @@ public class BeerServiceImpl implements BeerService {
 
         BeerPagedList beerPagedList;
         Page<Beer> beerPage;
+        
+        
+       log.info("Method called...");
 
         if (!StringUtils.isEmpty(beerName) && !StringUtils.isEmpty(beerStyle)) {
             //search both
@@ -72,6 +76,7 @@ public class BeerServiceImpl implements BeerService {
         return beerPagedList;
     }
 	
+    @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false ")
 	@Override
 	public BeerDto getById(UUID beerId, Boolean showInventoryOnHand) {
 		if(showInventoryOnHand) {
