@@ -23,7 +23,7 @@ import com.javageek.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/beer")
+@RequestMapping("/api/v1/")
 @RestController
 public class BeerController {
 	private static final Integer DEFAULT_PAGE_NUMBER = 0;
@@ -31,7 +31,7 @@ public class BeerController {
 
 	private final BeerService beerService;
 	
-	@GetMapping(produces = { "application/json" })
+	@GetMapping(produces = { "application/json" }, path="beer")
     public ResponseEntity<BeerPagedList> listBeers(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
                                                    @RequestParam(value = "pageSize", required = false) Integer pageSize,
                                                    @RequestParam(value = "beerName", required = false) String beerName,
@@ -55,7 +55,7 @@ public class BeerController {
         return new ResponseEntity<>(beerList, HttpStatus.OK);
     }
 
-	@GetMapping("/{beerId}")
+	@GetMapping("beer/{beerId}")
 	public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId,
 												@RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand) {
 		
@@ -65,13 +65,19 @@ public class BeerController {
 		
 		return ResponseEntity.ok(beerService.getById(beerId, showInventoryOnHand));
 	}
+	
+	@GetMapping("beerUpc/{upc}")
+	public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") String upc) {
+		
+		return ResponseEntity.ok(beerService.getByUpc(upc));
+	}
 
-	@PostMapping
+	@PostMapping(path="beer")
 	public ResponseEntity saveNewBeer(@RequestBody @Validated BeerDto beerDto) {
 		return new ResponseEntity<>(beerService.saveNewBeer(beerDto), HttpStatus.CREATED);
 	}
 
-	@PutMapping("/{beerId}")
+	@PutMapping("beer/{beerId}")
 	public ResponseEntity updateBeer(@PathVariable("beerId") UUID beerId, @RequestBody @Validated BeerDto beerDto) {
 		return new ResponseEntity<>(beerService.updateBeer(beerId, beerDto), HttpStatus.NO_CONTENT);
 	}
